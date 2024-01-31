@@ -1,7 +1,9 @@
-// lyde: https://www.epidemicsound.com/sound-effects/fireworks/ //<>// //<>// //<>// //<>// //<>// //<>//
+// lyde: https://www.epidemicsound.com/sound-effects/fireworks/ //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 class Raket {
   PVector location = new PVector(0, height);
   PVector velocity;
+  PVector locationParticle = new PVector(0, 0);
+  PVector velocityParticle;
 
   int dia=5;
 
@@ -32,7 +34,7 @@ class Raket {
     stroke(2);
   }
 
- //<>//
+
 
 
   void playFireSound() {
@@ -122,61 +124,49 @@ class Raket {
   void eksploderRaket() {
   } // made to overwrite
 }
-/*************************************/
 
 class Raket1 extends Raket {
+
   void eksploderRaket() {
-    noStroke();
-    if (dia < 500) {
-      fill(r, g, b, alfa);
-      dia++;
-      circle(location.x, location.y, dia);
+
+    pushMatrix();
+    translate(location.x, location.y);
+    stroke(r, b, g, alfa);
+
+    if (alfa > 0) {
+      for (int i=0; i<30; i++) {
+        fill(r, g, b, alfa);
+        for (int o = 0; o < 35; o++) {
+          if (alfa < 255-o) {
+            circle((255-o)-alfa, 0, 2-0.05*o);
+          }
+        }
+        rotate(1);
+      }
       // gør eksplosion gennemsigtig
       alfa--;
     }
-    stroke(2);
+    popMatrix();
   }
 }
-/*************************************/
 
 class Raket2 extends Raket {
-
   void eksploderRaket() {
-
     pushMatrix();
     translate(location.x, location.y);
     stroke(r, b, g, alfa);
 
-    for (int i=0; i<360; i++) {
-      fill(r, g, b, alfa);
-      rect(0, 0, 0, 1*i);
-      rotate(1);
-    }
+    creeper(location.x, location.y);
+
     popMatrix();
-    // gør eksplosion gennemsigtig
-    alfa--;
   }
-}
 
-/*************************************/
-
-class Raket3 extends Raket {
-
-
-
-  void eksploderRaket() {
-
+  void creeper(float x, float y) {
     pushMatrix();
-    translate(location.x, location.y);
+    translate(x, y);
     stroke(r, b, g, alfa);
-
-    for (int i=0; i<100; i++) {
-      fill(r, g, b, alfa);
-      rect(0, 0, 0, 1*i);
-      rotate(1);
-    }
+    fill(r, b, g, alfa);
+    circle(-255-alfa, (-255-alfa)/8*7, 10);
     popMatrix();
-    // gør eksplosion gennemsigtig
-    alfa--;
   }
 }
