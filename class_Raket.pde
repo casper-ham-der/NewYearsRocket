@@ -151,22 +151,58 @@ class Raket1 extends Raket {
 }
 
 class Raket2 extends Raket {
+  int count = 0;
+  int size = 255;
   void eksploderRaket() {
-    pushMatrix();
-    translate(location.x, location.y);
-    stroke(r, b, g, alfa);
+    if (alfa > 0) {
+      pushMatrix();
+      translate(location.x, location.y);
+      stroke(r, b, g, 0);
+      fill(r, b, g, alfa);
+      creeper();
+      popMatrix();
 
-    creeper(location.x, location.y);
-
-    popMatrix();
+      if (count > 0) {
+        alfa--;
+        count = 0;
+      } else {
+        count++;
+      }
+      size--;
+    }
   }
 
-  void creeper(float x, float y) {
-    pushMatrix();
-    translate(x, y);
-    stroke(r, b, g, alfa);
-    fill(r, b, g, alfa);
-    circle(-255-alfa, (-255-alfa)/8*7, 10);
-    popMatrix();
+  void creeper() {
+    for (int i = 0; i < 5; i++) {
+      circle(-((255-size)/16*14), -((255-size)/16*(16-2*i)), 3);
+      circle(-((255-size)/16*12), -((255-size)/16*(16-2*i)), 3);
+      circle(-((255-size)/16*10), -((255-size)/16*(16-2*i)), 3);
+      circle(-((255-size)/16*8), -((255-size)/16*(16-2*i)), 3);
+      circle(-((255-size)/16*6), -((255-size)/16*(16-2*i)), 3);
+      circle(((255-size)/16*14), -((255-size)/16*(16-2*i)), 3);
+      circle(((255-size)/16*12), -((255-size)/16*(16-2*i)), 3);
+      circle(((255-size)/16*10), -((255-size)/16*(16-2*i)), 3);
+      circle(((255-size)/16*8), -((255-size)/16*(16-2*i)), 3);
+      circle(((255-size)/16*6), -((255-size)/16*(16-2*i)), 3);
+    }
+
+    for (int i = 0; i < 7; i++) {
+      circle(-((255-size)/16*4), -((255-size)/16*(6-2*i)), 3);
+      circle(-((255-size)/16*2), -((255-size)/16*(6-2*i)), 3);
+      circle(((255-size)/16*0), -((255-size)/16*(6-2*i)), 3);
+      circle(((255-size)/16*4), -((255-size)/16*(6-2*i)), 3);
+      circle(((255-size)/16*2), -((255-size)/16*(6-2*i)), 3);
+    }
+    
+    for ( int i = 0; i < 7; i++) { 
+    circle(-((255-size)/16*6), ((255-size)/16*(2+2*i)), 3);
+    circle(-((255-size)/16*8), ((255-size)/16*(2+2*i)), 3);
+    circle(-((255-size)/16*10), ((255-size)/16*(2+2*i)), 3);
+    circle(-((255-size)/16*12), ((255-size)/16*(2+2*i)), 3);
+    circle(((255-size)/16*6), ((255-size)/16*(2+2*i)), 3);
+    circle(((255-size)/16*8), ((255-size)/16*(2+2*i)), 3);
+    circle(((255-size)/16*10), ((255-size)/16*(2+2*i)), 3);
+    circle(((255-size)/16*12), ((255-size)/16*(2+2*i)), 3);
+    }
   }
 }

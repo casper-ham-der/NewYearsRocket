@@ -2,6 +2,7 @@ import processing.sound.*;
 SoundFile start;
 SoundFile raket1;
 SoundFile raket2;
+int t = 0;
 
 
 //deklaration af raket batterier
@@ -25,5 +26,5 @@ void setup() {
 void draw() {
   background(205);
   r1.flyvRaket();
-  r2.flyvRaket(); 
+  r2.flyvRaket();
 }
